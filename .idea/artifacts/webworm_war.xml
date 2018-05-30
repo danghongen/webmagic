@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="webworm:war">
-    <output-path>$PROJECT_DIR$/../webworm/target</output-path>
-    <root id="archive" name="webworm-1.0-SNAPSHOT.war">
-      <element id="artifact" artifact-name="webworm:war exploded" />
-    </root>
-  </artifact>
-</component>
