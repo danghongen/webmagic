@@ -22,14 +22,15 @@ public class MyPageProcessor implements PageProcessor {
         //List<String> links = page.getHtml().xpath("//div[@class='co_content8']/ul/table/tbody/tr//td[@class='inddline']/a/@href").all();
         //无差别抓取，但是受字段取值代码的约束
        // List<String> links = page.getHtml().links().all();
-        List<String> links = page.getHtml().regex("/html/gndy/\\w+/\\d++/\\d+.html").all();
-        page.addTargetRequests(links);
-        page.putField("name",page.getHtml().xpath("//div[@class='title_all']/h1/font/text()").toString());
-        page.putField("link",page.getHtml().xpath("//div[@class='co_content8']/ul/div/span/table/tbody/tr/td/a/@href").toString());
-        if(page.getResultItems().get("link")==null){
-            //skip this page
-            page.setSkip(true);
+        if (page.getUrl().toString().equals("http://www.dytt8.net/")){                     //添加if是为了防止陷入爬虫黑洞
+//        List<String> links = page.getHtml().regex("/html/gndy/\\w+/\\d++/\\d+.html").all();这样抓取范围不明确，目标不精准改用
+            List<String> links = page.getHtml().xpath("//div[@class='co_content2']/ul/a/@href").all();
+        page.addTargetRequests(links);}
+        else {
+            page.putField("name", page.getHtml().xpath("//div[@class='title_all']/h1/font/text()").toString());
+            page.putField("link", page.getHtml().xpath("//div[@class='co_content8']/ul/div/span/table/tbody/tr/td/a/@href").toString());
         }
+
     }
 
     @Override
